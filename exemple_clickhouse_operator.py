@@ -17,8 +17,8 @@ with DAG(
     run_this_last = DummyOperator(task_id='run_this_last')
     # load sql from file
     select_data = ClickhouseOperator(
-        task_id='select_quit',
-        sql='query.sql',
+        task_id='show_databases',
+        sql='show databases;',
         click_conn_id='clickhouse_test_connect',
         do_xcom_push=False
     )
