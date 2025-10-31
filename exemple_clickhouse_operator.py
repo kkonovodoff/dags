@@ -25,7 +25,7 @@ with DAG(
     # set sql direct in the code section
     select_push = ClickhouseOperator(
         task_id='select_xcom',
-        sql='select * from TestTable;;',
+        sql='select * from helloworld.my_first_table;',
         click_conn_id='clickhouse_test_connect'
     )
 
