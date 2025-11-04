@@ -15,8 +15,8 @@ default_args = {
 dag = DAG('dbt_dag', default_args=default_args, schedule_interval=timedelta(days=1))
 # Define the dbt run command as a BashOperator
 
-run_dbt_model = BashOperator(
-    task_id='run_dbt_model',
-    bash_command='dbt run',
+run_dbt_debug = BashOperator(
+    task_id='run_dbt_debug',
+    bash_command='pwd ; dbt debug --project-dir $PWD/dags/repo/dbt/digipoc -t prod',
     dag=dag
 )
