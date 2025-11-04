@@ -17,6 +17,6 @@ dag = DAG('dbt_dag', default_args=default_args, schedule_interval=timedelta(days
 
 run_dbt_debug = BashOperator(
     task_id='run_dbt_debug',
-    bash_command='pwd ; ls ; dbt debug --project-dir $PWD/dbt/digipoc -t prod',
+    bash_command='ls -lah',
     dag=dag
 )
