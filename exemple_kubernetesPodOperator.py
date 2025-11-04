@@ -34,7 +34,7 @@ passing = KubernetesPodOperator(namespace='airflow-dbt',
 
 failing = KubernetesPodOperator(namespace='airflow-dbt',
                           service_account_name='airflow-dbt',
-                          image="ubuntu:22.04",
+                          image="python:slim-trixie",
                           cmds=["python","-c"],
                           arguments=["print('hello world')"],
                           labels={"foo": "bar"},
