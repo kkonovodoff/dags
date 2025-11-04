@@ -17,6 +17,6 @@ dag = DAG('dbt_dag', default_args=default_args, schedule_interval=timedelta(days
 
 run_dbt_debug = BashOperator(
     task_id='run_dbt_debug',
-    bash_command='ls -lah /opt/aiflow/dbt/digipoc ; dbt debug --project-dir /opt/aiflow/dbt/digipoc -t prod',
+    bash_command='ls -lah /opt/aiflow/dags/repo/dbt/digipoc ; dbt debug --project-dir /opt/aiflow/dags/repo/dbt/digipoc -t prod',
     dag=dag
 )
