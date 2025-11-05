@@ -20,7 +20,7 @@ dag = DAG(
 
 start = EmptyOperator(task_id='run_this_first', dag=dag)
 
-passing = KubernetesPodOperator(namespace='airflow-dbt',
+dag_dbt_debug = KubernetesPodOperator(namespace='airflow-dbt',
                           service_account_name='airflow-dbt',
                           image="730335176880.dkr.ecr.eu-west-3.amazonaws.com/digipoc/dbt:0.1",
                           cmds=["dbt","debug", "-t", "prod"],
@@ -32,4 +32,16 @@ passing = KubernetesPodOperator(namespace='airflow-dbt',
                           dag=dag
                           )
 
-passing.set_upstream(start)
+dag_dbt_run = KubernetesPodOperator(namespace='airflow-dbt',
+                          service_account_name='airflow-dbt',
+                          image="730335176880.dkr.ecr.eu-west-3.amazonaws.com/digipoc/dbt:0.2",
+                          cmds=["dbt","run", "--select", "airbyte_test", "-t", "prod"],
+                          labels={"dbt": "run"},
+                          name="dbt-run",
+                          task_id="dbt_run",
+                          get_logs=True,
+                          dag=dag
+                          )
+
+dag_dbt_debug.set_upstream(start)
+dag_dbt_run.set_upstream(start)

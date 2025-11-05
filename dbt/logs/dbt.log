@@ -66,3 +66,19 @@ Runtime Error
 [0m17:44:52.499444 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f7321043010>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f73208db2e0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f73208da590>]}
 [0m17:44:52.499823 [debug] [MainThread]: Flushing usage events
 [0m17:44:52.885793 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m18:59:36.826980 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f4822d13070>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f48217e12d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f48217e2e60>]}
+
+
+============================== 18:59:36.832233 | d3eb4d74-9ee7-4e4c-9c87-0076b61f7632 ==============================
+[0m18:59:36.832233 [info ] [MainThread]: Running with dbt=1.10.13
+[0m18:59:36.832741 [debug] [MainThread]: running dbt with arguments {'log_path': 'logs', 'log_format': 'default', 'printer_width': '80', 'use_colors': 'True', 'version_check': 'True', 'target_path': 'None', 'write_json': 'True', 'quiet': 'False', 'no_print': 'None', 'partial_parse': 'True', 'profiles_dir': '/home/toor/.dbt', 'warn_error': 'None', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'log_cache_events': 'False', 'fail_fast': 'False', 'empty': 'None', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'cache_selected_only': 'False', 'introspect': 'True', 'debug': 'False', 'invocation_command': 'dbt list', 'send_anonymous_usage_stats': 'True'}
+[0m18:59:36.833305 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path /home/toor/ENIX/clients/digimobee/dags/dbt/dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m18:59:36.834881 [debug] [MainThread]: Resource report: {"command_name": "list", "command_success": false, "command_wall_clock_time": 0.05948967, "process_in_blocks": "45560", "process_kernel_time": 0.207183, "process_mem_max_rss": "92596", "process_out_blocks": "8", "process_user_time": 1.104978}
+[0m18:59:36.835401 [debug] [MainThread]: Command `dbt list` failed at 18:59:36.835304 after 0.06 seconds
+[0m18:59:36.835733 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f4822d13070>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f48217af4f0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x7f48217e3a00>]}
+[0m18:59:36.836067 [debug] [MainThread]: Flushing usage events
+[0m18:59:37.230668 [debug] [MainThread]: An error was encountered while trying to flush usage events

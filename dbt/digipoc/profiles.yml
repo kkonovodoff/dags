@@ -3,7 +3,7 @@ digipoc:
   outputs:
     dev:
       type: clickhouse
-      schema: helloworld # ClickHouse database for dbt models
+      schema: airbyte #helloworld # ClickHouse database for dbt models
 
       # Optional
       host: localhost
@@ -14,7 +14,7 @@ digipoc:
 
     prod:
       type: clickhouse
-      schema: helloworld # ClickHouse database for dbt models
+      schema: airbyte # ClickHouse database for dbt models
 
       # Optional
       host: chi-digipoc-cluster1-0-0.clickhouse-installation.svc.cluster.local
