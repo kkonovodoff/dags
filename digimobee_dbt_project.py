@@ -15,16 +15,24 @@ default_args = {
 }
 
 dag = DAG(
-    'kubernetes_dbt_sample', default_args=default_args, schedule_interval=timedelta(minutes=10))
+    'digimobee_dbt_project', default_args=default_args, schedule_interval=timedelta(minutes=10))
 
-
-start = EmptyOperator(task_id='run_this_first', dag=dag)
 
 dag_dbt_debug = KubernetesPodOperator(namespace='airflow-dbt',
                           service_account_name='airflow-dbt',
-                          image="730335176880.dkr.ecr.eu-west-3.amazonaws.com/digipoc/dbt:0.1",
+                          image="730335176880.dkr.ecr.eu-west-3.amazonaws.com/digipoc/dbt:1.0",
                           cmds=["dbt","debug", "-t", "prod"],
-                          #arguments=["-t prod"],
+                          labels={"dbt": "debug"},
+                          name="dbt-debug",
+                          task_id="dbt_debug",
+                          get_logs=True,
+                          dag=dag
+                          )
+
+dag_dbt_seed_full_refresh = KubernetesPodOperator(namespace='airflow-dbt',
+                          service_account_name='airflow-dbt',
+                          image="730335176880.dkr.ecr.eu-west-3.amazonaws.com/digipoc/dbt:1.0",
+                          cmds=["dbt","seed", "--full-refresh", "-t", "prod"],
                           labels={"dbt": "debug"},
                           name="dbt-debug",
                           task_id="dbt_debug",
@@ -34,8 +42,8 @@ dag_dbt_debug = KubernetesPodOperator(namespace='airflow-dbt',
 
 dag_dbt_run = KubernetesPodOperator(namespace='airflow-dbt',
                           service_account_name='airflow-dbt',
-                          image="730335176880.dkr.ecr.eu-west-3.amazonaws.com/digipoc/dbt:0.2",
-                          cmds=["dbt","run", "--select", "airbyte_test", "-t", "prod"],
+                          image="730335176880.dkr.ecr.eu-west-3.amazonaws.com/digipoc/dbt:1.0",
+                          cmds=["dbt","run", "-t", "prod"],
                           labels={"dbt": "run"},
                           name="dbt-run",
                           task_id="dbt_run",
@@ -44,4 +52,5 @@ dag_dbt_run = KubernetesPodOperator(namespace='airflow-dbt',
                           )
 
 dag_dbt_debug.set_upstream(start)
+dag_dbt_seed_full_refresh.set_upstream(start)
 dag_dbt_run.set_upstream(start)
