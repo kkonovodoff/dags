@@ -35,7 +35,7 @@ dag_dbt_seed_full_refresh = KubernetesPodOperator(namespace='airflow-dbt',
                           cmds=["dbt","seed", "--full-refresh", "-t", "prod"],
                           labels={"dbt": "debug"},
                           name="dbt-debug",
-                          task_id="dbt_debug",
+                          task_id="dbt_seed",
                           get_logs=True,
                           dag=dag
                           )
