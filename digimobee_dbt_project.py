@@ -17,6 +17,7 @@ default_args = {
 dag = DAG(
     'digimobee_dbt_project', default_args=default_args, schedule_interval=timedelta(minutes=10))
 
+start = EmptyOperator(task_id='blank_task', dag=dag)
 
 dag_dbt_debug = KubernetesPodOperator(namespace='airflow-dbt',
                           service_account_name='airflow-dbt',
